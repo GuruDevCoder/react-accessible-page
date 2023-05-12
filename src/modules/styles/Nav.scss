@@ -1,0 +1,62 @@
+@import "mixins";
+
+.topnav {
+  list-style-type: none;
+  margin: 0;
+  text-align: right;
+  position: relative;
+}
+
+.navitem {
+  display: inline-block;
+  padding: 0 $base-unit * 2;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-size: 0.9rem;
+
+  .responsive.topnav & {
+    display: block;
+  }
+}
+
+.link {
+  display: inline-block;
+  text-align: center;
+  text-decoration: none;
+
+  color: white;
+
+  .responsive.topnav & {
+    display: block;
+    text-align: left;
+  }
+}
+
+.icon {
+  display: none;
+}
+
+.button{
+  all:initial;
+  cursor: pointer;
+  color:white;
+  font-size: x-large;
+  margin-top: - $base-unit/2;
+}
+
+@include breakpoint-small {
+
+  .navitem:not(:last-child) {
+    display: none;
+  }
+
+  .icon {
+    display: block;
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+
+}
+
+

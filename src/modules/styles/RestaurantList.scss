@@ -1,0 +1,79 @@
+@import "mixins";
+
+$font-size: 1.1rem;
+
+.container {
+  width: 80%;
+  margin: $base-unit*8 auto 0;
+  border-top: 1px solid $light-grey;
+
+  @include breakpoint-small {
+    width: 100%;
+  }
+}
+
+.title {
+  @include visually-hidden();
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  padding: $base-unit * 3;
+  border-bottom: 1px solid $light-grey;
+}
+
+.caret {
+  display: none;
+  all: initial;
+  cursor: pointer;
+
+  @include breakpoint-small {
+    display: block;
+    @include caret();
+  }
+}
+
+.item_title {
+  margin: 0;
+  flex: 1 1 68%;
+
+  font-size: $font-size;
+  font-weight: normal;
+}
+
+.ol {
+  padding: 0;
+  margin: 0;
+}
+
+.dl {
+  flex: 1 1 32%;
+  display: flex;
+  justify-content: space-between;
+  margin: 0;
+
+  @include breakpoint-small {
+    flex-direction: column;
+  }
+}
+
+.dd {
+  font-size: $font-size;
+  color: $secondary-color;
+  margin: 0;
+  @include breakpoint-small {
+    font-size: 0.9em;
+    margin: $base-unit / 4 0;
+  }
+}
+
+.dt {
+  @include visually-hidden();
+}
+
+.dtPrice {
+  @include breakpoint-small {
+    @include visually-hidden();
+  }
+}

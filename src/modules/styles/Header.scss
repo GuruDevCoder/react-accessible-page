@@ -1,0 +1,123 @@
+@import "mixins";
+
+$header-height: 360px;
+$header-height-small: 320px;
+
+.skipLink {
+  @include visually-hidden();
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  min-height: $header-height;
+
+  background: url('../../assets/bg.jpg') no-repeat center top scroll;
+  background-size: cover;
+}
+
+.head_top {
+  display: flex;
+  flex: 0 0 auto;
+  justify-content: space-around;
+  align-items: center;
+  padding: $base-unit * 2 0;
+
+  @include breakpoint-small {
+    background: black;
+  }
+}
+
+.head_bottom {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+}
+
+.title {
+  text-align: center;
+  font-size: 0.7rem;
+  letter-spacing: 2px;
+  font-weight: normal;
+  text-transform: uppercase;
+}
+
+.delivering{
+  opacity: 0.6;
+}
+
+.zone {
+  display: block;
+  font-size: 1.8rem;
+  opacity: 1;
+  margin-top: $base-unit * 3
+}
+
+.paragraph {
+  max-width: 30rem;
+  line-height: 2em;
+  font-size: 0.9rem;
+  text-align: center;
+
+  @include breakpoint-small {
+    max-width: 80%;
+  }
+
+}
+
+.logoWrapper {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  margin: 0;
+
+  & > * {
+    flex: 0 0 auto;
+  }
+
+}
+
+.logo {
+  flex: 0 0 auto;
+  @include breakpoint-small {
+    display: none;
+  }
+}
+
+.logoSmall {
+  flex: 0 0 auto;
+  display: none;
+  @include breakpoint-small {
+    display: block;
+  }
+}
+
+.caption {
+  color: white;
+  text-transform: uppercase;
+  font-size: x-large;
+  letter-spacing: 4px;
+
+  @include breakpoint-small {
+    text-align: center;
+    font-size: large;
+
+    letter-spacing: 2px;
+  }
+}
+
+.navWrapper {
+  flex: 0 0 60%;
+
+  @include breakpoint-small {
+    position: absolute;
+    right: $base-unit;
+    top: $base-unit;
+  }
+}
+
+
+

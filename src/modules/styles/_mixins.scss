@@ -1,0 +1,116 @@
+@import "variables";
+
+// =============================================================================
+// String Replace
+// =============================================================================
+
+@function str-replace($string, $search, $replace: "") {
+  $index: str-index($string, $search);
+
+  @if $index {
+    @return str-slice($string, 1, $index - 1) + $replace + str-replace(str-slice($string, $index + str-length($search)), $search, $replace);
+  }
+
+  @return $string;
+}
+
+// =============================================================================
+// Font Face
+// =============================================================================
+
+@mixin font-face($name, $path, $weight: null, $style: null, $exts: eot woff2 woff ttf svg) {
+  $src: null;
+
+  $extmods: (
+          eot: "?",
+          svg: "#" + str-replace($name, " ", "_")
+  );
+
+  $formats: (
+          otf: "opentype",
+          ttf: "truetype"
+  );
+
+  @each $ext in $exts {
+    $extmod: if(map-has-key($extmods, $ext), $ext + map-get($extmods, $ext), $ext);
+    $format: if(map-has-key($formats, $ext), map-get($formats, $ext), $ext);
+    $src: append($src, url(quote($path + "." + $extmod)) format(quote($format)), comma);
+  }
+
+  @font-face {
+    font-family: quote($name);
+    font-style: $style;
+    font-weight: $weight;
+    src: $src;
+  }
+}
+
+// =============================================================================
+// Hide content (not from screen readers)
+// =============================================================================
+
+@mixin visually-hidden() {
+  /*https://developer.yahoo.com/blogs/ydn/clip-hidden-content-better-accessibility-53456.html*/
+  position: absolute !important;
+  clip: rect(1px 1px 1px 1px); /* IE6, IE7 */
+  clip: rect(1px, 1px, 1px, 1px);
+  padding: 0 !important;
+  border: 0 !important;
+  height: 1px !important;
+  width: 1px !important;
+  overflow: hidden;
+
+}
+
+// =============================================================================
+// RWD mixins
+// =============================================================================
+
+@mixin breakpoint-small() {
+  @media only screen and (min-width: $breaskpoint-small) and (max-width: $breaskpoint-medium) {
+    @content;
+  }
+}
+
+@mixin breakpoint-medium() {
+  @media only screen and (min-width: $breaskpoint-medium) and (max-width: $breaskpoint-large) {
+    @content;
+  }
+}
+
+@mixin breakpoint-large() {
+  @media only screen and (min-width: $breaskpoint-large) {
+    @content;
+  }
+}
+
+// =============================================================================
+// Caret generator
+// =============================================================================
+@mixin caret($caret-color: $brand-color) {
+
+  position: relative;
+  width: 16px;
+  height: 16px;
+
+  &:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-left: 8px solid $caret-color;
+    border-top: 8px solid transparent;
+    border-bottom: 8px solid transparent;
+  }
+
+  &:after {
+    content: '';
+    position: absolute;
+    left: -2px;
+    top: 0;
+    border-left: 8px solid white;
+    border-top: 8px solid transparent;
+    border-bottom: 8px solid transparent;
+  }
+
+}
